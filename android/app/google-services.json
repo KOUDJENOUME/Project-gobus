@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1044586775525",
+    "project_id": "gobus-a80f3",
+    "storage_bucket": "gobus-a80f3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1044586775525:android:3d09a21b842ddd0d43e50c",
+        "android_client_info": {
+          "package_name": "com.barbeblanche.gobus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1044586775525-b0vgme3csmpeo1qla963nrr4ir0i8gou.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.barbeblanche.gobus",
+            "certificate_hash": "cc4f1e482890e4111389eefa298a9c1dc46da76a"
+          }
+        },
+        {
+          "client_id": "1044586775525-9rmh9ljhk3ijlvj6j2hj0fe91v4aeuhr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbg5c0zrPMloq3mHa8uO3Vhd09laJS61k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1044586775525-9rmh9ljhk3ijlvj6j2hj0fe91v4aeuhr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
