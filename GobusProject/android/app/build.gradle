@@ -1,0 +1,66 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+    id "com.google.gms.google-services"
+
+}
+
+def localPropertiesFile = rootProject.file('local.properties')
+def localProperties = [:] // Utilisation d'un map plutôt que Properties
+
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        reader.eachLine { line ->
+            def (key, value) = line.split('=', 2)
+            localProperties[key.trim()] = value?.trim() // Ajout des propriétés dans un map
+        }
+    }
+}
+
+def flutterVersionCode = localProperties.get('flutter.versionCode') ?: '1'
+def flutterVersionName = localProperties.get('flutter.versionName') ?: '1.0'
+
+android {
+    namespace "com.barbeblanche.gobusproject"
+    compileSdkVersion flutter.compileSdkVersion
+    ndkVersion flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    defaultConfig {
+        applicationId "com.barbeblanche.gobusproject"
+        minSdkVersion 23
+        targetSdkVersion flutter.targetSdkVersion
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.debug
+        }
+    }
+}
+
+flutter {
+    source '../..'
+}
+
+dependencies {
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.android.gms:play-services-auth'
+}
+apply plugin: 'com.google.gms.google-services'
+
