@@ -17,7 +17,6 @@ const userSchema = new Schema({
         type: String,
         lowercase: true,
         required: [true, "userName can't be empty"],
-        // @ts-ignore
         match: [
             /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/,
             "userName format is not correct",
@@ -36,16 +35,23 @@ const userSchema = new Schema({
         type: String,
         required: [true, "preferencesDeNotification is required"],
     },
-    passwordResetToken: {  // Ajout du token de réinitialisation
+    passwordResetToken: {  // Token de réinitialisation du mot de passe
         type: String,
     },
-    passwordResetExpires: {  // Ajout de l'expiration du token
+    passwordResetExpires: {  // Expiration du token de réinitialisation
         type: Date,
-    }
-},{ timestamps: true });
+    },
+    isBlocked: {  // Indique si l'utilisateur est bloqué
+        type: Boolean,
+        default: false,
+    },
+    blockExpires: {  // Expiration du blocage (null si permanent)
+        type: Date,
+        default: null,
+    },
+}, { timestamps: true });
 
-
-// used while encrypting user entered password
+// Middleware pour hacher le mot de passe avant sauvegarde
 userSchema.pre("save", async function() {
     var user = this;
     if (!user.isModified("password")) {
@@ -61,21 +67,29 @@ userSchema.pre("save", async function() {
     }
 });
 
-// used while signIn decrypt
+// Comparaison des mots de passe (connexion)
 userSchema.methods.comparePassword = async function(candidatePassword) {
     try {
         console.log('Stored password:', this.password);
-        // Afficher le mot de passe envoyé par l'utilisateur
         console.log('Received password:', candidatePassword);
-        // @ts-ignore
-
         const isMatch = await bcrypt.compare(candidatePassword, this.password);
-        console.log('Password match:', isMatch); // Affiche si les mots de passe correspondent
-
+        console.log('Password match:', isMatch);
         return isMatch;
     } catch (error) {
         throw error;
     }
+};
+
+// Vérification si l'utilisateur est bloqué
+userSchema.methods.isAccountBlocked = function() {
+    // Si "blockExpires" est défini et expiré, débloquer automatiquement
+    if (this.blockExpires && this.blockExpires < Date.now()) {
+        this.isBlocked = false;
+        this.blockExpires = null;
+        this.save(); // Enregistrer les modifications dans la base de données
+        return false;
+    }
+    return this.isBlocked;
 };
 
 const UserModel = db.model('user', userSchema);

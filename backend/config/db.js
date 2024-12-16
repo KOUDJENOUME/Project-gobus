@@ -1,9 +1,12 @@
 const mongoose = require('mongoose');
 
-const connection = mongoose.createConnection(`mongodb://127.0.0.1:27017/ToDoDB`).on('open',()=>{
-    console.log("MongoDB Connected");
-}).on('error',()=>{
-    console.log("MongoDB Connection error");
-});
+// Connexion à MongoDB avec mongoose.connect() 
+mongoose.connect('mongodb://127.0.0.1:27017/ToDoDB')
+    .then(() => {
+        console.log("MongoDB Connected");
+    })
+    .catch((err) => {
+        console.log("MongoDB Connection error:", err);
+    });
 
-module.exports = connection;
+module.exports = mongoose;

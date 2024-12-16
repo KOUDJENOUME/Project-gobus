@@ -1,10 +1,30 @@
 const router = require("express").Router();
 const UserController = require('../controller/user.controller');
+const UserServices = require('../services/user.service');
 
 // Routes existantes
 router.post("/register", UserController.register);
 router.post("/login", UserController.login);
+// Suppression d'un utilisateur par son ID
+router.delete("/users/:id", async (req, res) => {
+    const { id } = req.params;
+    try {
+        const deletedUser = await UserServices.deleteUser(id);
+        res.status(200).json({
+            message: "User successfully deleted",
+            data: deletedUser,
+        });
+    } catch (error) {
+        res.status(400).json({
+            message: "Error deleting user",
+            error: error.message,
+        });
+    }
+});
+router.post("/block", UserController.blockUser);
 
+// Route pour débloquer un utilisateur
+router.post("/unblock", UserController.unblockUser);
 // Routes ajoutées pour la fonctionnalité "Mot de passe oublié"
 router.post("/forgot-password", UserController.forgotPassword);
 router.post("/reset-password/:token", UserController.resetPassword);

@@ -17,7 +17,25 @@ exports.register = async (req, res, next) => {
         next(err);
     }
 };
+exports.blockUser = async (req, res, next) => {
+    try {
+        const { userId, durationInHours } = req.body;
+        const result = await UserServices.blockUser(userId, durationInHours);
+        res.status(200).json(result);
+    } catch (error) {
+        next(error);
+    }
+};
 
+exports.unblockUser = async (req, res, next) => {
+    try {
+        const { userId } = req.body;
+        const result = await UserServices.unblockUser(userId);
+        res.status(200).json(result);
+    } catch (error) {
+        next(error);
+    }
+};
 exports.login = async (req, res, next) => {
     try {
         const { email, password } = req.body;
@@ -27,6 +45,10 @@ exports.login = async (req, res, next) => {
         let user = await UserServices.checkUser(email);
         if (!user) {
             throw new Error('User does not exist');
+        }
+        const isBlocked = await UserServices.isUserBlocked(user._id);
+        if (isBlocked) {
+            throw new Error('Your account is blocked. Please contact support.');
         }
         const isPasswordCorrect = await user.comparePassword(password);
         if (!isPasswordCorrect) {
