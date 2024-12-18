@@ -1,12 +1,22 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+require("dotenv").config(); // Charger les variables d'environnement
 
-// Connexion à MongoDB avec mongoose.connect() 
-mongoose.connect('mongodb://127.0.0.1:27017/ToDoDB')
-    .then(() => {
-        console.log("MongoDB Connected");
-    })
-    .catch((err) => {
-        console.log("MongoDB Connection error:", err);
+const connectDB = async () => {
+  try {
+    // Récupérer l'URL de connexion depuis les variables d'environnement
+    const mongoURI = process.env.MONGO_URI;
+
+    // Connexion à MongoDB sans les options obsolètes
+    await mongoose.connect(mongoURI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
     });
 
-module.exports = mongoose;
+    console.log("Connexion à MongoDB réussie");
+  } catch (err) {
+    console.error("Erreur de connexion à MongoDB:", err.message);
+    process.exit(1); // Arrêter le processus en cas d'erreur de connexion
+  }
+};
+
+connectDB();

@@ -13,7 +13,9 @@ const authenticateToken = (req, res, next) => {
 
   jwt.verify(token, process.env.JWT_SECRET_KEY, (err, user) => {
     if (err) {
-      return res.status(403).json({ success: false, message: "Token invalide" });
+      return res
+        .status(403)
+        .json({ success: false, message: "Token invalide" });
     }
     req.user = user;
     next();
@@ -22,18 +24,28 @@ const authenticateToken = (req, res, next) => {
 
 // Route pour envoyer un message
 router.post("/send-message", authenticateToken, async (req, res) => {
-  const {content } = req.body;
+  const { content } = req.body;
 
   if (!content) {
-    return res.status(400).json({ success: false, message: " content est requis." });
+    return res
+      .status(400)
+      .json({ success: false, message: " content est requis." });
   }
 
   try {
     const userId = req.user._id; // Récupère l'ID de l'utilisateur depuis le token
     const message = await MessageService.sendMessage(userId, content);
-    return res.status(200).json({ success: true, message: "Message envoyé avec succès.", data: message });
+    return res
+      .status(200)
+      .json({
+        success: true,
+        message: "Message envoyé avec succès.",
+        data: message,
+      });
   } catch (error) {
-    return res.status(500).json({ success: false, message: "Erreur interne du serveur." });
+    return res
+      .status(500)
+      .json({ success: false, message: "Erreur interne du serveur." });
   }
 });
 // Route pour répondre à un message
@@ -52,32 +64,46 @@ router.post("/reply-message", authenticateToken, async (req, res) => {
     const reply = await MessageService.replyToMessage(userId, content);
     return res
       .status(200)
-      .json({ success: true, message: "Réponse envoyée avec succès.", data: reply });
+      .json({
+        success: true,
+        message: "Réponse envoyée avec succès.",
+        data: reply,
+      });
   } catch (error) {
     return res.status(500).json({
       success: false,
       message: "Erreur lors de l'envoi de la réponse.",
     });
   }
-})
+});
 router.get("/messages", async (req, res) => {
-    try {
-      // Récupérer les messages envoyés par les clients
-      const messages = await MessageService.getMessagesForAdmin();
-      return res.status(200).json({ success: true, messages });
-    } catch (error) {
-      return res.status(500).json({ success: false, message: "Erreur interne du serveur." });
-    }
-  });
-  
+  try {
+    // Récupérer les messages envoyés par les clients
+    const messages = await MessageService.getMessagesForAdmin();
+    return res.status(200).json({ success: true, messages });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ success: false, message: "Erreur interne du serveur." });
+  }
+});
+
 // Route pour marquer un message comme lu
 router.patch("/messages/:id/read", authenticateToken, async (req, res) => {
   try {
     const messageId = req.params.id;
     const message = await MessageService.markMessageAsRead(messageId);
-    return res.status(200).json({ success: true, message: "Message marqué comme lu.", data: message });
+    return res
+      .status(200)
+      .json({
+        success: true,
+        message: "Message marqué comme lu.",
+        data: message,
+      });
   } catch (error) {
-    return res.status(500).json({ success: false, message: "Erreur interne du serveur." });
+    return res
+      .status(500)
+      .json({ success: false, message: "Erreur interne du serveur." });
   }
 });
 

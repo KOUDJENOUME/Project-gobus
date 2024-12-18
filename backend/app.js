@@ -1,10 +1,12 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-require('dotenv').config();
+require("dotenv").config();
 
 const UserRoute = require("./routes/user.routes");
 const NotificationRoute = require("./routes/notification.routes");
-const message = require("./routes/message.routes");  // Assurez-vous que le chemin est correct
+const message = require("./routes/message.routes");
+const reservationRoutes = require("./routes/reservation.routes");
+const trajetRoute = require("./routes/trajet.routes");
 
 const http = require("http");
 const { Server } = require("socket.io");
@@ -16,8 +18,8 @@ const server = http.createServer(app); // Crée un serveur HTTP
 const io = new Server(server, {
   cors: {
     origin: "*", // Changez cette URL en production
-    methods: ["GET", "POST"]
-  }
+    methods: ["GET", "POST"],
+  },
 });
 
 // Middleware pour parser le corps de la requête (req.body)
@@ -35,8 +37,14 @@ app.set("views", path.join(__dirname, "views"));
 app.use("/", UserRoute);
 app.use("/", NotificationRoute);
 
+// Route pour la reservation des tickets
+app.use("/", reservationRoutes);
+
+// Route pour la création d'un trajet par l'admin
+app.use("/", trajetRoute);
+
 // Ajoutez la route pour les messages
-app.use("/", message);  // Ajoutez cette ligne pour définir le chemin de l'API des messages
+app.use("/", message); // Ajoutez cette ligne pour définir le chemin de l'API des messages
 
 // Stockage des connexions des utilisateurs pour envoyer des notifications
 const connectedUsers = {}; // Pour associer un userId à son socket ID
@@ -48,7 +56,9 @@ io.on("connection", (socket) => {
   // Enregistrer un utilisateur avec son socket ID
   socket.on("register", (userId) => {
     connectedUsers[userId] = socket.id;
-    console.log(`Utilisateur ${userId} enregistré avec socket ID : ${socket.id}`);
+    console.log(
+      `Utilisateur ${userId} enregistré avec socket ID : ${socket.id}`
+    );
   });
 
   // Gérer la déconnexion d'un utilisateur
@@ -77,7 +87,7 @@ const NotificationService = {
     } else {
       console.log(`Utilisateur ${userId} non connecté.`);
     }
-  }
+  },
 };
 
 // Exemple d'envoi d'une notification

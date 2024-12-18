@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const router = express.Router();
 
 // Tableau temporaire pour stocker les tokens
-let availableTokens = []; 
+let availableTokens = [];
 
 // Middleware pour vérifier le token d'authentification
 const authenticateToken = (req, res, next) => {
@@ -27,7 +27,9 @@ const authenticateToken = (req, res, next) => {
   jwt.verify(token, process.env.JWT_SECRET_KEY, (err, user) => {
     if (err) {
       console.error("Erreur de validation du token : ", err); // Log de l'erreur si le token est invalide
-      return res.status(403).json({ success: false, message: "Token invalide" });
+      return res
+        .status(403)
+        .json({ success: false, message: "Token invalide" });
     }
     req.user = user; // Stocke les informations de l'utilisateur dans la requête
     next();
@@ -38,7 +40,10 @@ router.delete("/notifications/:id", authenticateToken, async (req, res) => {
   const userId = req.user._id;
 
   try {
-    const result = await NotificationService.deleteNotification(notificationId, userId);
+    const result = await NotificationService.deleteNotification(
+      notificationId,
+      userId
+    );
     return res.status(200).json({
       success: true,
       message: "Notification supprimée avec succès.",
@@ -47,7 +52,8 @@ router.delete("/notifications/:id", authenticateToken, async (req, res) => {
   } catch (error) {
     return res.status(404).json({
       success: false,
-      message: error.message || "Erreur lors de la suppression de la notification.",
+      message:
+        error.message || "Erreur lors de la suppression de la notification.",
     });
   }
 });
@@ -57,7 +63,9 @@ router.delete("/notifications", authenticateToken, async (req, res) => {
   const userId = req.user._id;
 
   try {
-    const result = await NotificationService.deleteAllNotificationsForUser(userId);
+    const result = await NotificationService.deleteAllNotificationsForUser(
+      userId
+    );
     return res.status(200).json({
       success: true,
       message: "Toutes les notifications ont été supprimées avec succès.",
@@ -73,21 +81,27 @@ router.delete("/notifications", authenticateToken, async (req, res) => {
 // Route pour envoyer une notification à un utilisateur spécifique
 router.post("/send-notification", (req, res) => {
   const { userId, message } = req.body; // Récupère l'ID de l'utilisateur et le message depuis le corps de la requête
-  
+
   if (!userId || !message) {
     // Vérifie que les paramètres sont fournis
-    return res.status(400).json({ success: false, message: "userId et message sont requis." });
+    return res
+      .status(400)
+      .json({ success: false, message: "userId et message sont requis." });
   }
 
   try {
     // Appel du service NotificationService pour envoyer la notification
     NotificationService.sendNotification(userId, message);
-    
-    return res.status(200).json({ success: true, message: "Notification envoyée avec succès." });
+
+    return res
+      .status(200)
+      .json({ success: true, message: "Notification envoyée avec succès." });
   } catch (error) {
     // Gestion des erreurs
     console.error("Erreur lors de l'envoi de la notification :", error);
-    return res.status(500).json({ success: false, message: "Erreur interne du serveur." });
+    return res
+      .status(500)
+      .json({ success: false, message: "Erreur interne du serveur." });
   }
 });
 
@@ -95,25 +109,32 @@ router.post("/send-notification", (req, res) => {
 router.get("/notifications", authenticateToken, async (req, res) => {
   try {
     const userId = req.user._id; // Récupère l'ID de l'utilisateur depuis le token
-    console.log("Le userid du user " , userId);
+    console.log("Le userid du user ", userId);
 
     // Appel du service NotificationService pour récupérer les notifications de l'utilisateur
-    const notifications = await NotificationService.getNotificationsForUser(userId);
+    const notifications = await NotificationService.getNotificationsForUser(
+      userId
+    );
 
     // Affiche tous les tokens disponibles et celui utilisé pour l'authentification
     console.log("Tous les tokens disponibles : ", availableTokens);
-    console.log("Token utilisé pour l'authentification : ", req.headers["authorization"]);
+    console.log(
+      "Token utilisé pour l'authentification : ",
+      req.headers["authorization"]
+    );
 
     return res.status(200).json({
       success: true,
       notifications,
       availableTokens: availableTokens, // Retourne tous les tokens enregistrés
-      usedToken: req.headers["authorization"] // Retourne le token utilisé dans cette requête
+      usedToken: req.headers["authorization"], // Retourne le token utilisé dans cette requête
     });
   } catch (error) {
     console.error("Erreur lors de la récupération des notifications :", error);
-    return res.status(500).json({ success: false, message: "Erreur interne du serveur." });
+    return res
+      .status(500)
+      .json({ success: false, message: "Erreur interne du serveur." });
   }
 });
 
-module.exports = router;  // Exporter uniquement le router ici
+module.exports = router; // Exporter uniquement le router ici
