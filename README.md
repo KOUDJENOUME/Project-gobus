@@ -4,16 +4,6 @@ GoBus est une application mobile développée en Flutter permettant aux utilisat
 
 Ce projet est développé en équipe et vise à simplifier la réservation de tickets de bus, tout en offrant une interface utilisateur fluide et réactive.
 
-## Table des matières
-- [Technologies utilisées](#technologies-utilisées)
-- [Prérequis](#prérequis)
-- [Installation du backend](#installation-du-backend)
-- [Installation du frontend](#installation-du-frontend)
-- [Configuration de Firebase](#configuration-de-firebase)
-- [Démarrer l'application](#démarrer-lapplication)
-- [Contribuer](#contribuer)
-- [Licences](#licences)
-
 ## Technologies utilisées
 
 ### Frontend
