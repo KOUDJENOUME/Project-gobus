@@ -30,7 +30,7 @@ Ce projet est développé en équipe et vise à simplifier la réservation de ti
 
 1. Clonez ce dépôt sur votre machine locale :
    ```bash
-   git clone https://github.com/votre-utilisateur/GoBus.git
+   git clone https://github.com/KOUDJENOUME/Project-gobus.git
    cd Project-gobus/backend
    ```
    
@@ -61,7 +61,7 @@ Ce projet est développé en équipe et vise à simplifier la réservation de ti
 1. Clonez ce dépôt et recevez au dossier Flutter :
 
 ```bash
-git clone https://github.com/votre-utilisateur/GoBus.git
+git clone https://github.com/KOUDJENOUME/Project-gobus.git
 cd Project-gobus/GobusProject
 
 2. Assurez-vous que Flutter est installé et configurez votre environnement :
