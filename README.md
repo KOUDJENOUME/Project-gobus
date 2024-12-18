@@ -63,16 +63,19 @@ Ce projet est développé en équipe et vise à simplifier la réservation de ti
 ```bash
 git clone https://github.com/KOUDJENOUME/Project-gobus.git
 cd Project-gobus/GobusProject
+```
 
 2. Assurez-vous que Flutter est installé et configurez votre environnement :
 
 ```bash
 flutter doctor
+```
 
 3. Installez les dépendances Flutter :
 
 ```bash
 flutter pub get
+```
 
 4. Configurez Firebase dans l'application Flutter :
  
@@ -83,7 +86,7 @@ flutter pub get
 
 ```bash
 flutter run
-
+```
 ## Licences
 
 Ce projet est sous licence MIT - voir le fichier 'LICENSE' pour plus de détails.
