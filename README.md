@@ -31,7 +31,7 @@ Ce projet est développé en équipe et vise à simplifier la réservation de ti
 1. Clonez ce dépôt sur votre machine locale :
    ```bash
    git clone https://github.com/votre-utilisateur/GoBus.git
-   cd GoBus/backend
+   cd Project-gobus/backend
    ```
    
 2. Installez les dépendances du backend :
@@ -62,7 +62,7 @@ Ce projet est développé en équipe et vise à simplifier la réservation de ti
 
 ```bash
 git clone https://github.com/votre-utilisateur/GoBus.git
-cd GoBus/frontend
+cd Project-gobus/GobusProject
 
 2. Assurez-vous que Flutter est installé et configurez votre environnement :
 
