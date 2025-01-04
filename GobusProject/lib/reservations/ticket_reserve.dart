@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/reservations/detail_reservation.dart';
 
 final List<Map<String, dynamic>> ticketReserve = [
   {
@@ -37,6 +38,8 @@ class TicketReserve extends StatefulWidget {
 }
 
 class _TicketReserveState extends State<TicketReserve> {
+  int currentInd =0;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -91,11 +94,11 @@ class _TicketReserveState extends State<TicketReserve> {
                                     ticket["date_complet"]
                                 ),
                                 Text(
-                                    'Reservé le ${ticket["date_reservation"].day}/${ticket["date_reservation"].month}/${ticket["date_reservation"].year}',
+                                  'Reservé le ${ticket["date_reservation"].day}/${ticket["date_reservation"].month}/${ticket["date_reservation"].year}',
                                   style: TextStyle(
-                                    color: Color(0xFFDD4011),
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold
+                                      color: Color(0xFFDD4011),
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold
                                   ),
                                 ),
                                 const SizedBox(height: 8),
@@ -103,7 +106,14 @@ class _TicketReserveState extends State<TicketReserve> {
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     TextButton.icon(
-                                      onPressed: (){},
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => const DetailReservation(),
+                                          ),
+                                        );
+                                      },
                                       icon: const Text(
                                         'Voir les détails de reservations',
                                         style: TextStyle(
@@ -130,6 +140,37 @@ class _TicketReserveState extends State<TicketReserve> {
                 ),
               ],
             ),
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: currentInd,
+            selectedItemColor: const Color(0xFFDD4011),
+            unselectedItemColor: const Color(0xFF192A41),
+            onTap: (index) {
+              setState(() {
+                currentInd = index;
+              });
+            },
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home_outlined),
+                activeIcon: Icon(Icons.home),
+                label: 'Accueil',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.search_outlined),
+                label: 'Rechercher',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.confirmation_number_outlined),
+                activeIcon: Icon(Icons.confirmation_number),
+                label: 'Tickets',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.account_circle_outlined),
+                activeIcon: Icon(Icons.account_circle),
+                label: 'Profil',
+              ),
+            ],
           ),
         )
     );

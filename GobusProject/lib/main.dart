@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/reservations/ticket_reserve.dart';
 import 'loginPage.dart'; // Assurez-vous que ce fichier contient la définition de SignInPage.
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.black,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SignInPage(), // Redirige directement vers la page de connexion
+      home: TicketReserve(), // Redirige directement vers la page de connexion
     );
   }
 }
