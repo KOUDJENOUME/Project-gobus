@@ -37,8 +37,15 @@ class ReservationPrecedente extends StatefulWidget {
 class _ReservationPrecedenteState extends State<ReservationPrecedente> {
   final TextStyle titleStyle = const TextStyle(
     color: Color(0xFF192A41),
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.w600,
     fontSize: 16,
+    fontFamily: 'Montserrat',
+  );
+  final TextStyle name = const TextStyle(
+    color: Color(0xFF000000),
+    fontWeight: FontWeight.w500,
+    fontSize: 12.8,
+    fontFamily: 'Montserrat',
   );
 
   @override
@@ -53,7 +60,10 @@ class _ReservationPrecedenteState extends State<ReservationPrecedente> {
             ),
             title: const Text(
               "Réservations Précédentes",
-              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 25),
+              style: TextStyle(fontWeight: FontWeight.w700,
+                fontSize: 24,
+                fontFamily: 'Montserrat',
+              ),
             ),
             centerTitle: true,
           ),
@@ -79,7 +89,7 @@ class _ReservationPrecedenteState extends State<ReservationPrecedente> {
                           ),
                           margin: EdgeInsets.symmetric(vertical: 10.0),
                           child: Padding(
-                            padding: const EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(15),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
@@ -88,16 +98,16 @@ class _ReservationPrecedenteState extends State<ReservationPrecedente> {
                                     style: titleStyle
                                 ),
                                 Text(
-                                    ticket["date_complet"]
+                                    ticket["date_complet"],style: name,
                                 ),
-                                const Divider(height: 20,),
+                                const Divider(height: 15,),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text("Nom du Bus",),
+                                        Text("Nom du Bus",style: name,),
                                         Text(
                                             ticket["nom_bus"],
                                             style: titleStyle
@@ -107,7 +117,7 @@ class _ReservationPrecedenteState extends State<ReservationPrecedente> {
                                     Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text("ID Ticket", ),
+                                        Text("ID Ticket", style: name,),
                                         Text(
                                             "${ticket["id_ticket"]}",
                                             style: titleStyle
@@ -116,18 +126,14 @@ class _ReservationPrecedenteState extends State<ReservationPrecedente> {
                                     ),
                                   ],
                                 ),
-                                const Divider(height: 20),
+                                const Divider(height: 15),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text("Montant:"),
+                                    Text("Montant:",style: name,),
                                     Text(
                                       "${ticket["montant"]} ${ticket["devise"]}",
-                                      style: TextStyle(
-                                          color: const Color(0xFFDD4011),
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 16
-                                      ),
+                                      style: titleStyle.copyWith(color: Color(0xFFDD4011))
                                     ),
                                   ],
                                 ),

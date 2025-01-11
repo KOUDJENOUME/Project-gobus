@@ -8,7 +8,6 @@ import 'package:velocity_x/velocity_x.dart';
 import 'applogo.dart';
 import 'package:http/http.dart' as http;
 import 'config.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 import 'data/services/auth_service.dart';
 

@@ -37,8 +37,15 @@ class DetailReservation extends StatefulWidget {
 class _DetailReservationState extends State<DetailReservation> {
   final TextStyle titleStyle = const TextStyle(
     color: Color(0xFF192A41),
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.w600,
     fontSize: 16,
+    fontFamily: 'Montserrat',
+  );
+  final TextStyle name = const TextStyle(
+    color: Color(0xFF000000),
+    fontWeight: FontWeight.w500,
+    fontSize: 12.8,
+    fontFamily: 'Montserrat',
   );
 
   @override
@@ -46,14 +53,22 @@ class _DetailReservationState extends State<DetailReservation> {
     return SafeArea(
         child:Scaffold(
           appBar: AppBar(
-            leading: Icon(
-              Icons.arrow_back,
-              size: 30,
-              weight: 700,
+            leading: IconButton(
+              icon: const Icon(
+                Icons.arrow_back,
+                size: 30,
+                weight: 700,
+              ),
+              onPressed: () => Navigator.pop(context),
             ),
-            title: Text('Détails de réservation',style: TextStyle(fontWeight: FontWeight.w700, fontSize: 25)),
+            title: const Text(
+              'Détails de réservation',
+              style: TextStyle(fontWeight: FontWeight.w700,
+                fontSize: 24,
+                fontFamily: 'Montserrat',
+              )
+            ),
             centerTitle: true,
-
           ),
           body: Padding(
               padding: EdgeInsets.all(16),
@@ -63,17 +78,18 @@ class _DetailReservationState extends State<DetailReservation> {
                 Card(
                   color: Colors.grey[350],
                   child: Padding(
-                    padding: const EdgeInsets.all(5),
+                    padding: const EdgeInsets.fromLTRB(15, 5, 10, 5),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               ticketDetail["nom_itineraire"],
                               style: titleStyle,
                             ),
-                            Text(ticketDetail["date_complet"])
+                            Text(ticketDetail["date_complet"],style: name,)
                           ],
                         ),
                         TextButton.icon(
@@ -100,19 +116,19 @@ class _DetailReservationState extends State<DetailReservation> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("Nom du Bus"),
+                                Text("Nom du Bus",style: name,),
                                 Text(
                                   ticketDetail["nom_bus"],
                                   style: titleStyle,
                                 ),
                                 const SizedBox(height: 10),
-                                Text("ID Ticket"),
+                                Text("ID Ticket",style: name,),
                                 Text(
                                   "${ticketDetail["id_ticket"]}",
                                   style: titleStyle,
                                 ),
                                 const SizedBox(height: 10),
-                                Text("Heure de Depart"),
+                                Text("Heure de Depart",style: name,),
                                 Text(
                                   "${ticketDetail["heure_depart"]}",
                                   style: titleStyle,
@@ -123,19 +139,19 @@ class _DetailReservationState extends State<DetailReservation> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("Numero de siege"),
+                                Text("Numero de siege",style: name,),
                                 Text(
                                   "${ticketDetail["numero_siege"]}",
                                   style: titleStyle,
                                 ),
                                 const SizedBox(height: 10),
-                                Text("Numero du bus"),
+                                Text("Numero du bus",style: name,),
                                 Text(
                                   "${ticketDetail["numero_bus"]}",
                                   style: titleStyle,
                                 ),
                                 const SizedBox(height: 10),
-                                Text("Heure d'Arrivée"),
+                                Text("Heure d'Arrivée",style: name,),
                                 Text(
                                   "${ticketDetail["heure_arrive"]}",
                                   style: titleStyle,
@@ -155,7 +171,7 @@ class _DetailReservationState extends State<DetailReservation> {
                     child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Total:',style: const TextStyle(fontSize: 15),),
+                      Text('Total:',style: name.copyWith(fontSize: 16.2),),
                       Text(
                         "${ticketDetail['montant']} ${ticketDetail['devise']}",
                         style: titleStyle.copyWith(color: const Color(0xFFDD4011)),
@@ -190,19 +206,11 @@ class _DetailReservationState extends State<DetailReservation> {
                 RichText(
                     text:TextSpan(
                       text: 'Rappel: ',
-                        style: TextStyle(
-                          color: const Color(0xFF192A41),
-                          fontWeight: FontWeight.w700,
-                          fontSize: 15
-                        ),
+                        style: titleStyle.copyWith(fontSize: 16),
                       children: [
                         TextSpan(
                           text: "il suffit de montrer votre QR code lors de l'embarquement",
-                          style: TextStyle(
-                            color:  Colors.black,
-                            fontWeight: FontWeight.w400,
-                              fontSize: 14
-                          ),
+                          style: name.copyWith(fontSize: 15),
                         )
                       ]
                     )
@@ -210,11 +218,7 @@ class _DetailReservationState extends State<DetailReservation> {
                 TextButton(onPressed: (){},
                     child: Text(
                         "Suivre mon trajet",
-                      style: TextStyle(
-                          color: const Color(0xFFDD4011),
-                          fontWeight: FontWeight.w700,
-                          fontSize: 16
-                      ),
+                      style: titleStyle.copyWith(fontSize: 15,color: Color(0xFFDD4011)),
                     )
                 ),
                 Expanded(
@@ -228,7 +232,7 @@ class _DetailReservationState extends State<DetailReservation> {
                             elevation: 1,
                             backgroundColor: Colors.grey[350],
                             padding: EdgeInsets.symmetric(vertical: 4),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                           ),
                           onPressed: ()=>Navigator.pop(context),
                           child: Text('Annuler')
@@ -241,8 +245,8 @@ class _DetailReservationState extends State<DetailReservation> {
                             elevation: 1,
                             backgroundColor: Color(0xFF192A41),
                             foregroundColor: Colors.white,
-                            padding: EdgeInsets.symmetric(vertical: 4),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                            padding: EdgeInsets.symmetric(vertical: 5),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                           ),
                           onPressed: (){},
                           child: Text('Télécharger')
