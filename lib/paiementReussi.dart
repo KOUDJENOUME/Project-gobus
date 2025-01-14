@@ -1,18 +1,5 @@
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp(PaiementReussiApp());
-}
-
-class PaiementReussiApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: PaiementReussiScreen(),
-      debugShowCheckedModeBanner: false,
-    );
-  }
-}
+import 'notifications.dart'; // Importez la page Notifications
 
 class PaiementReussiScreen extends StatelessWidget {
   @override
@@ -22,7 +9,11 @@ class PaiementReussiScreen extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context);
+            // Navigation vers NotificationScreen
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => NotificationScreen()),
+            );
           },
         ),
         backgroundColor: Colors.white,

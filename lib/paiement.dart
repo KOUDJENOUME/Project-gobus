@@ -1,18 +1,5 @@
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp(PaymentApp());
-}
-
-class PaymentApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: PaymentScreen(),
-    );
-  }
-}
+import 'paiementReussi.dart';
 
 class PaymentScreen extends StatefulWidget {
   @override
@@ -48,9 +35,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  PaymentOption(
-                      icon:
-                          "assets/mtn.png"), // Replace with actual asset paths
+                  PaymentOption(icon: "assets/mtn.png"),
                   PaymentOption(icon: "assets/moov.png"),
                   PaymentOption(icon: "assets/cash.png"),
                 ],
@@ -110,12 +95,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   onPressed: () {
                     if (_formKey.currentState != null &&
                         _formKey.currentState!.validate()) {
-                      // Handle payment submission
-                      print('Nom: ${_nameController.text}');
-                      print('Numéro: ${_numberController.text}');
-                      print('Montant: ${_amountController.text}');
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Paiement en cours...')),
+                      // Rediriger vers la page PaiementReussiScreen
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PaiementReussiScreen(),
+                        ),
                       );
                     }
                   },
