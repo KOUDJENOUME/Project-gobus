@@ -29,7 +29,7 @@ class PaiementReussiScreen extends StatelessWidget {
                 width: 100,
                 height: 100,
                 decoration: BoxDecoration(
-                  color: Colors.orange,
+                  color: Color(0xFFDD4011),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
@@ -44,6 +44,7 @@ class PaiementReussiScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
+                  fontFamily: 'Montserrat',
                 ),
               ),
               SizedBox(height: 15),
@@ -61,8 +62,9 @@ class PaiementReussiScreen extends StatelessWidget {
                   'détails de réservation.',
                   style: TextStyle(
                     fontSize: 16,
-                    color: Colors.orange,
+                    color: Color(0xFFDD4011),
                     fontWeight: FontWeight.bold,
+                    fontFamily: 'Montserrat',
                   ),
                 ),
               ),

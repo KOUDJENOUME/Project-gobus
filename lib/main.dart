@@ -10,6 +10,9 @@ class PaymentApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        fontFamily: 'Montserrat', // Définit la police par défaut
+      ),
       home: PaymentScreen(),
     );
   }

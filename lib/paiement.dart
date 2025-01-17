@@ -20,7 +20,16 @@ class _PaymentScreenState extends State<PaymentScreen> {
           icon: Icon(Icons.arrow_back),
           onPressed: () {},
         ),
-        title: Text('Paiement'),
+        title: Text(
+          'Paiement',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Montserrat',
+          ),
+        ),
+        centerTitle: true,
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0,
@@ -89,7 +98,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 width: double.infinity,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange,
+                    backgroundColor: Color(0xFFDD4011),
                     padding: EdgeInsets.symmetric(vertical: 16),
                   ),
                   onPressed: () {
@@ -104,7 +113,13 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       );
                     }
                   },
-                  child: Text('Payer', style: TextStyle(fontSize: 16)),
+                  child: Text(
+                    'Payer',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ),
             ],

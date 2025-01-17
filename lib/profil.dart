@@ -5,17 +5,17 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profil'),
+        title: Text(''),
         centerTitle: true,
         backgroundColor: Colors.white,
+        elevation: 0,
       ),
       body: Center(
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20), // Arrondi des bords
           child: Container(
             color: Colors.white,
-            margin: EdgeInsets.all(
-                16), // Marge pour éviter que l'arrondi soit collé au bord de l'écran
+            margin: EdgeInsets.all(16),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,8 +74,10 @@ class ProfilePage extends StatelessWidget {
                       },
                       child: Text('Déconnexion',
                           style: TextStyle(
-                              color: Colors.orange,
-                              fontWeight: FontWeight.bold)),
+                            color: Color(0xFFDD4011),
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Montserrat',
+                          )),
                     ),
                   ),
                 ],
@@ -91,20 +93,24 @@ class ProfilePage extends StatelessWidget {
   Widget _buildProfileHeader() {
     return Container(
       padding: EdgeInsets.all(20),
-      color: Colors.grey[200],
+      color: Colors.white,
       child: Row(
         children: [
           CircleAvatar(
             radius: 40,
-            backgroundColor: Colors.blue,
-            child: Icon(Icons.person, size: 50, color: Colors.white),
+            backgroundColor: Colors.white,
+            child: Icon(Icons.person, size: 50, color: Colors.blue),
           ),
           SizedBox(width: 20),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('Edward WILSON',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Montserrat',
+                  )),
               Text('karelhans@amen.com',
                   style: TextStyle(fontSize: 16, color: Colors.grey[700])),
             ],
@@ -120,7 +126,10 @@ class ProfilePage extends StatelessWidget {
       child: Text(
         title,
         style: TextStyle(
-            fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black87),
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Montserrat',
+            color: Colors.black87),
       ),
     );
   }
@@ -130,7 +139,11 @@ class ProfilePage extends StatelessWidget {
     return ListTile(
       leading: Icon(icon, size: 30),
       title: Text(title,
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+            fontFamily: 'Montserrat',
+          )),
       subtitle: Text(subtitle),
       trailing: Icon(Icons.arrow_forward_ios),
       onTap: onTap,

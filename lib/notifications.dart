@@ -24,7 +24,11 @@ class NotificationScreen extends StatelessWidget {
         title: Text(
           'Notifications',
           style: TextStyle(
-              color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Montserrat',
+          ),
         ),
         centerTitle: true,
         backgroundColor: Colors.white,
@@ -87,13 +91,17 @@ class NotificationCard extends StatelessWidget {
           Expanded(
             child: Text(
               title,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'Montserrat',
+              ),
             ),
           ),
           Container(
             padding: EdgeInsets.all(6),
             decoration: BoxDecoration(
-              color: Colors.red,
+              color: Color(0xFFDD4011),
               shape: BoxShape.circle,
             ),
             child: Text(
@@ -101,6 +109,7 @@ class NotificationCard extends StatelessWidget {
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
+                  fontFamily: 'Montserrat',
                   fontSize: 14),
             ),
           ),
